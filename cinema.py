@@ -42,6 +42,14 @@ class Hall:
         else:
             print(f"Invalid show ID. Please try again!")
 
+    def view_show_list(self):
+        if 0 != len(self.show_list):
+            print("Availabe Shows are down below")
+            for show in self.show_list:
+                print(show)
+        else:
+            print("Oops! There are no available shows today.")
+
 
 banalata = Hall(6, 6, 3)
 banalata.entry_show(12, "jawan", "23/10/23 8:00pm")
