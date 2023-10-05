@@ -50,8 +50,9 @@ class Hall:
         else:
             print("Oops! There are no available shows today.")
 
-
-banalata = Hall(6, 6, 3)
-banalata.entry_show(12, "jawan", "23/10/23 8:00pm")
-banalata.entry_show(12, "gawan", "23/10/23 8:00pm")
-print(banalata.seats)
+    def view_available_seats(self, id):
+        if id in self.seats:
+            for row in self.seats[id]:
+                print(row)
+        else:
+            print(f"There is not availble seats on show ID {id}")
