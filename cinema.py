@@ -27,6 +27,21 @@ class Hall:
         else:
             print(f"Show ID '{id}' already exists.")
 
+    def book_seats(self, id, bookings):  # todo bookings list
+        if id not in self.seats:
+            if 0 <= self.rows and 0 <= self.cols:
+                if self.seats[id][self.rows][self.cols] == 0:
+                    self.seats[id][self.rows][self.cols] = 1
+                    print(f"Seat ({self.rows}, {self.cols} is booked for show ID {id})")
+                else:
+                    print(
+                        f"Seat ({self.rows}, {self.cols}) is already booked for show ID {id}"
+                    )
+            else:
+                print(f"Invalid seat position. Please try again!")
+        else:
+            print(f"Invalid show ID. Please try again!")
+
 
 banalata = Hall(6, 6, 3)
 banalata.entry_show(12, "jawan", "23/10/23 8:00pm")
