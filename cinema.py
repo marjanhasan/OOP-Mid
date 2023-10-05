@@ -34,20 +34,24 @@ class Hall:
         seat = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
         self.seats[id] = seat
 
-    def book_seats(self, id, bookings):  # todo bookings list
-        if id not in self.seats:
-            if 0 <= self.rows and 0 <= self.cols:
-                if self.seats[id][self.rows][self.cols] == 0:
-                    self.seats[id][self.rows][self.cols] = 1
-                    print(f"Seat ({self.rows}, {self.cols} is booked for show ID {id})")
-                else:
+    def book_seats(self, id, bookings):
+        if id in self.seats:
+            for book in bookings:
+                row = int(book[0])
+                col = int(book[1])
+                if (row < 0) or (self.rows <= row) or (col < 0) or (self.cols <= col):
+                    print(f"Invalid seat position ({row}, {col}). Please try again!")
+                    continue
+                if self.seats[id][row][col] == 0:
+                    self.seats[id][row][col] = 1
                     print(
-                        f"Seat ({self.rows}, {self.cols}) is already booked for show ID {id}"
+                        f"Seat ({row}, {col}) is booked sucessfully for the show ID {id}"
                     )
-            else:
-                print(f"Invalid seat position. Please try again!")
+                else:
+                    print(f"Seat ({row}, {col}) is already booked for the show ID {id}")
+
         else:
-            print(f"Invalid show ID. Please try again!")
+            print(f"Invalid show ID: {id}. Please try again!")
 
     def view_show_list(self):
         if len(self.show_list) != 0:
@@ -58,28 +62,26 @@ class Hall:
             print("Oops! There are no available shows today.")
 
     def view_available_seats(self, id):
+        if len(self.show_list) == 0:
+            print("Oops! There are no available shows today.")
+            return
         if id in self.seats:
             for row in self.seats[id]:
                 for element in row:
-                    if element == 1:
-                        print("B", end=" ")
-                    else:
-                        print(element, end=" ")
+                    print(element, end=" ")
                 print()
         else:
             print(f"Oops! Invalid show ID: {id}. Please try again")
-        return
 
 
-banalata = Hall(3, 3, 2)
-banalata.entry_show("s1", "jawan", "2:00")
+banalata = Hall(6, 6, 2)
 banalata.entry_show("s1", "jawan", "2:00")
 banalata.entry_show("s3", "dawan", "4:00")
 banalata.entry_show("s4", "dawan", "4:00")
-banalata.entry_show("s1", "dawan", "4:00")
-banalata.entry_show("s1", "dawan", "4:00")
-banalata.entry_show("s3", "dawan", "4:00")
+banalata.book_seats("s1", [(0, 2), (0, 3)])
+banalata.book_seats("s1", [(0, 0), (0, 1)])
+banalata.book_seats("s1", [(5, 6), (0, 5)])
+banalata.book_seats("s1", [(1, 6)])
+banalata.book_seats("s1", [(0, 0), (0, 10), (2, 3)])
+banalata.view_available_seats("s1")
 banalata.view_show_list()
-banalata.view_available_seats("s3")
-for s in banalata.show_list:
-    print(s[0])
