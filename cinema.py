@@ -66,6 +66,7 @@ class Hall:
             print("Oops! There are no available shows today.")
             return
         if id in self.seats:
+            print("Availabe seats are down below")
             for row in self.seats[id]:
                 for element in row:
                     print(element, end=" ")
@@ -73,15 +74,24 @@ class Hall:
         else:
             print(f"Oops! Invalid show ID: {id}. Please try again")
 
+    def __repr__(self) -> str:
+        print("\nAvailabe Shows are down below")
+        for show in self.show_list:
+            print(f"Show ID: {show[0]}, Name: {show[1]}, Time: {show[2]}")
+        print("\nAvailabe seats are down below")
+        for show_id, seat_arrangement in self.seats.items():
+            print(f"Available seats for show id: {show_id}")
+            for row in seat_arrangement:
+                print(" ".join(map(str, row)))
+            print()
+        return f"Welcome for the best ever 5* experiences\n"
+
 
 banalata = Hall(6, 6, 2)
-banalata.entry_show("s1", "jawan", "2:00")
-banalata.entry_show("s3", "dawan", "4:00")
-banalata.entry_show("s4", "dawan", "4:00")
-banalata.book_seats("s1", [(0, 2), (0, 3)])
-banalata.book_seats("s1", [(0, 0), (0, 1)])
-banalata.book_seats("s1", [(5, 6), (0, 5)])
-banalata.book_seats("s1", [(1, 6)])
-banalata.book_seats("s1", [(0, 0), (0, 10), (2, 3)])
-banalata.view_available_seats("s1")
-banalata.view_show_list()
+banalata.entry_show("111", "Jawan", "6/10/23 10:00AM")
+banalata.entry_show("112", "Dhawan", "6/10/23 12:00PM")
+banalata.book_seats("111", [(0, 0), (0, 1)])
+t = 3
+while t != 0:
+    print(banalata)
+    t -= 1
