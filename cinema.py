@@ -129,7 +129,7 @@ while True:
         seats = int(input("How many seats do you want (in number): "))
 
         if seats == 0:
-            print("Invalid seats", seats, "Please try again!")
+            print("\nInvalid seats", seats, "Please try again!")
             continue
 
         bookings = []
